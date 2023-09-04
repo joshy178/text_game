@@ -4,10 +4,8 @@
 
 
 
-
-if( blink){
-	draw_text(x, y,text_input + "_")
+var _temp_text = text_input;
+if( blink and string_length(_temp_text) > 0 ){
+	_temp_text = string_set_byte_at(_temp_text, cursor_index, 95);
 }
-else{
-	draw_text(x, y,text_input)
-}
+draw_text(x, y,_temp_text);

@@ -5,4 +5,6 @@
 last_blink = 0
 blink = true
 text_input = ""
-cursor_index = 0;
+cursor_index = 1;
+last_backspace_check = 0;
+last_backspace_delete = 0;
