@@ -3,7 +3,7 @@
 
 
 #macro CURSOR_BLINK_TIME (50 * 10000)
-#macro BACKSPACE_POLL_TIME (25 * 10000)
+#macro BACKSPACE_POLL_TIME (50 * 10000)
 #macro BACKSPACE_DELETE_SPEED_TIME (5 * 10000)
 
 
@@ -27,8 +27,25 @@ if( keyboard_check_pressed(vk_left)){
 	}
 	last_blink = get_timer();
 	blink = true;
+	
+	last_left_check = get_timer();
 
 }
+else if(keyboard_check_direct(vk_left)
+		and ( (get_timer() - last_left_check ) > BACKSPACE_POLL_TIME )
+		and ( (get_timer() - last_left ) > BACKSPACE_DELETE_SPEED_TIME )
+
+){
+		cursor_index--;
+	if( cursor_index < 1){
+		cursor_index = 1;	
+	}
+	_temp = "";
+	last_left = get_timer();
+	last_blink = get_timer();
+	blink = true;
+
+	}
 else if( keyboard_check_pressed(vk_right)){
 	cursor_index++;	
 	if( cursor_index > string_length(text_input) + 1){
@@ -38,7 +55,7 @@ else if( keyboard_check_pressed(vk_right)){
 	blink = true;
 }
 
-else if(keyboard_check_direct(vk_left)){ _temp = ""; }
+
 else if(keyboard_check_released(vk_left)){ _temp = ""; }
 
 else if(keyboard_check_direct(vk_right)){ _temp = ""; }
@@ -60,7 +77,7 @@ else if( keyboard_check_pressed (vk_backspace) ){
 //if enough time has passed before we have hit the backspace key
 //and we haven't delete a character in a little bit
 //and we are still holding down backspace
-else if( ( (get_timer() - last_backspace_check ) > CURSOR_BLINK_TIME )
+else if( ( (get_timer() - last_backspace_check ) > BACKSPACE_POLL_TIME )
 		and  ( (get_timer() - last_backspace_delete ) > BACKSPACE_DELETE_SPEED_TIME )
 		and keyboard_check_direct(vk_backspace) ){
 	//reset the last delete time
