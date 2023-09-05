@@ -10,7 +10,12 @@
 
 
 var _temp = keyboard_string
+var _temp_char = keyboard_lastchar
+var _temp_char_2 = keyboard_key
+
 keyboard_string = ""
+keyboard_lastchar = ""
+keyboard_key = 0
 
 if( (get_timer() - last_blink ) > CURSOR_BLINK_TIME ){
 	last_blink = get_timer();
@@ -95,9 +100,9 @@ else if( ( (get_timer() - last_backspace_check ) > BACKSPACE_POLL_TIME )
 else{
 
 	
-	if (string_count(chr(keyboard_key), enabled_keys)) and (string_length(chr(keyboard_key)) == 1){
-		text_input = string_insert(_temp, text_input, cursor_index);
-		cursor_index += string_length(_temp)
+	if (string_count(chr(_temp_char_2), enabled_keys)) and (string_length(chr(_temp_char_2)) == 1){
+		text_input = string_insert(_temp_char, text_input, cursor_index);
+		cursor_index += string_length(_temp_char)
 		if( cursor_index > string_length(text_input)+ 1){
 			cursor_index = string_length(text_input)+ 1;	
 		}
