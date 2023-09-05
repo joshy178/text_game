@@ -15,4 +15,4 @@ if( blink ){
 }
 _temp_text += "\nCursor index: " + string(cursor_index) + "\n len: " + string(string_length(text_input))
 draw_set_font(ConsoleFont);
-draw_text(x, y,_temp_text);
+draw_text_color(x, y,_temp_text, c_green, c_green, c_green, c_green, 1);

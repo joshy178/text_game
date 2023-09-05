@@ -8,3 +8,4 @@ text_input = ""
 cursor_index = 1;
 last_backspace_check = 0;
 last_backspace_delete = 0;
+enabled_keys = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890";

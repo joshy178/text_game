@@ -7,6 +7,8 @@
 #macro BACKSPACE_DELETE_SPEED_TIME (5 * 10000)
 
 
+
+
 var _temp = keyboard_string
 keyboard_string = ""
 
@@ -46,12 +48,12 @@ else if(keyboard_check_released(vk_right)){ _temp = ""; }
 // if the backspace is pressed, then do the first character delete,
 // then wait a little bit before we delete more
 else if( keyboard_check_pressed (vk_backspace) ){
-	if(string_length(text_input) > 0){
-		text_input = string_delete(text_input, cursor_index, 1);
-	}
-	cursor_index--
-	if( cursor_index < 1){
-		cursor_index = 1;	
+	if(string_length(text_input) > 0 and cursor_index > 1){
+		text_input = string_delete(text_input, cursor_index-1, 1);
+		cursor_index--
+		if( cursor_index < 1){
+			cursor_index = 1;	
+		}
 	}
 	last_backspace_check = get_timer();
 }
@@ -64,22 +66,24 @@ else if( ( (get_timer() - last_backspace_check ) > CURSOR_BLINK_TIME )
 	//reset the last delete time
 	last_backspace_delete = get_timer();
 	//delete a character
-	if(string_length(text_input) > 0){
-		text_input = string_delete(text_input, cursor_index, 1);
+	if(string_length(text_input) > 0 and cursor_index > 1){
+		text_input = string_delete(text_input, cursor_index-1, 1);
+		cursor_index--
+		if( cursor_index <1){
+			cursor_index = 1;
+		}
 	}
-	cursor_index--
-	if( cursor_index <1){
-		cursor_index = 1;
-	}
+
 }
 else{
 
 	
-	
-	text_input += _temp
-	cursor_index += string_length(_temp)
-	if( cursor_index > string_length(text_input)+ 1){
-		cursor_index = string_length(text_input)+ 1;	
+	if (string_count(chr(keyboard_key), enabled_keys)) and (string_length(chr(keyboard_key)) == 1){
+		text_input = string_insert(_temp, text_input, cursor_index);
+		cursor_index += string_length(_temp)
+		if( cursor_index > string_length(text_input)+ 1){
+			cursor_index = string_length(text_input)+ 1;	
+		}
 	}
 }
 
