@@ -15,4 +15,6 @@ if( blink ){
 }
 _temp_text += "\nCursor index: " + string(cursor_index) + "\n len: " + string(string_length(text_input))
 draw_set_font(ConsoleFont);
-draw_text_color(x, y,_temp_text, c_green, c_green, c_green, c_green, 1);
+draw_set_colour(c_green)
+//draw_text_color(x, y,_temp_text, c_green, c_green, c_green, c_green, 1);
+draw_text_transformed(x, y, _temp_text, 1, 1, 0); // this will draw at 64 pixels tall

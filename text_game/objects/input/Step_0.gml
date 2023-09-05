@@ -58,12 +58,27 @@ else if( keyboard_check_pressed(vk_right)){
 	}	
 	last_blink = get_timer();
 	blink = true;
+	last_right_check = get_timer();
+
 }
 
 
 else if(keyboard_check_released(vk_left)){ _temp = ""; }
 
-else if(keyboard_check_direct(vk_right)){ _temp = ""; }
+else if(keyboard_check_direct(vk_right)
+		and ( (get_timer() - last_right_check ) > BACKSPACE_POLL_TIME )
+		and ( (get_timer() - last_right ) > BACKSPACE_DELETE_SPEED_TIME )){
+		_temp = "";
+		
+		cursor_index++;	
+		if( cursor_index > string_length(text_input) + 1){
+			cursor_index = string_length(text_input) + 1;	
+		}	
+		last_blink = get_timer();
+		blink = true;
+		last_right = get_timer();
+
+		}
 else if(keyboard_check_released(vk_right)){ _temp = ""; }
 
 
@@ -109,6 +124,6 @@ else{
 	}
 }
 
-
+text_input = string_lower(text_input)
 
 
