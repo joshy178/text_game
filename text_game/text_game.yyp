@@ -36,6 +36,7 @@
   "resources": [
     {"id":{"name":"input","path":"objects/input/input.yy",},},
     {"id":{"name":"console","path":"objects/console/console.yy",},},
+    {"id":{"name":"ConsoleFont","path":"fonts/ConsoleFont/ConsoleFont.yy",},},
     {"id":{"name":"Room1","path":"rooms/Room1/Room1.yy",},},
   ],
   "RoomOrderNodes": [

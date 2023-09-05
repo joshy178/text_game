@@ -5,7 +5,14 @@
 
 
 var _temp_text = text_input;
-if( blink and string_length(_temp_text) > 0 ){
-	_temp_text = string_set_byte_at(_temp_text, cursor_index, 95);
+if( blink ){
+	if( cursor_index > string_length(_temp_text) ){
+		_temp_text = _temp_text + "_"	
+	}
+	else{
+		_temp_text = string_set_byte_at(_temp_text, cursor_index, 95);
+	}
 }
+_temp_text += "\nCursor index: " + string(cursor_index) + "\n len: " + string(string_length(text_input))
+draw_set_font(ConsoleFont);
 draw_text(x, y,_temp_text);
